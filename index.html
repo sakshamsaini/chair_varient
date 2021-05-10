@@ -7,29 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link rel="stylesheet" href="demo-styles.css" />
-
+     <script type="module" src="https://unpkg.com/@google/model-viewer"></script>
+    <script src="https://unpkg.com/focus-visible/dist/focus-visible.js" defer></script>
     <!-- The following libraries and polyfills are recommended to maximize browser support -->
     <!-- NOTE: you must adjust the paths as appropriate for your project -->
 
     <!-- 🚨 REQUIRED: Web Components polyfill to support Edge and Firefox < 63 -->
-    <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.1.3/webcomponents-loader.js"></script>
-
-    <!-- 💁 OPTIONAL: Intersection Observer polyfill for better performance in Safari and IE11 -->
-    <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
-
-    <!-- 💁 OPTIONAL: Resize Observer polyfill improves resize behavior in non-Chrome browsers -->
-    <script src="https://unpkg.com/resize-observer-polyfill@1.5.0/dist/ResizeObserver.js"></script>
-
-    <!-- 💁 OPTIONAL: Fullscreen polyfill is needed to fully support AR features -->
-    <script src="https://unpkg.com/fullscreen-polyfill@1.0.2/dist/fullscreen.polyfill.js"></script>
-
-    <!-- 💁 OPTIONAL: The :focus-visible polyfill removes the focus ring for some input types -->
-    <script
-      src="https://unpkg.com/focus-visible@5.0.2/dist/focus-visible.js"
-      defer
-    ></script>
-
-    <script src="https://unpkg.com/xstate@4.6.7/dist/xstate.js"></script>
+   
 
     <script src="/utils.js"></script>
   </head>
@@ -42,10 +26,10 @@
     <img class="header_logo" src="image.png"></img>
     <div id="card">
       <model-viewer
-        src= "https://cdn.glitch.com/5f94c02f-1cbb-485c-a4b9-0b727526843c%2FAppscrip%20Logo%203D%20colors%20export%201.glb?v=1619515082596"
+        src= "/SheenChair.glb"
 "
-        ios-src="https://cdn.glitch.com/5f94c02f-1cbb-485c-a4b9-0b727526843c%2FAppscrip%20Logo%203D%20colors%20export%201.usdz?v=1619515081195"
-        alt="Appscrip"
+        
+        alt="A 3D chair"
         shadow-intensity="1"
         exposure="1"
         camera-controls
@@ -55,7 +39,11 @@
         ar-modes="scene-viewer quick-look"
         ar-placement="wall"
         animation-crossfade-duration="0"
-      ></model-viewer>
+      >
+        <div class="controls">
+         <div>Variant: <select id="variant"></select></div>
+       </div>
+      </model-viewer>
 
       <section class="attribution">
         <span>
@@ -90,18 +78,23 @@
       });
     </script>
 
-    <!-- 💁 Include both scripts below to support all browsers! -->
+    <script>
+const modelViewerVariants = document.querySelector("model-viewer#chair");
+const select = document.querySelector('#variant');
 
-    <!-- Loads <model-viewer> for modern browsers: -->
-    <script
-      type="module"
-      src="https://unpkg.com/@google/model-viewer@v0.10.0/dist/model-viewer.js"
-    ></script>
+modelViewerVariants.addEventListener('load', () => {
+  const names = modelViewerVariants.availableVariants;
+  for (const name of names) {
+    const option = document.createElement('option');
+    option.value = name;
+    option.textContent = name;
+    select.appendChild(option);
+  }
+});
 
-    <!-- Loads <model-viewer> for old browsers like IE11: -->
-    <script
-      nomodule
-      src="https://unpkg.com/@google/model-viewer@v0.10.0/dist/model-viewer-legacy.js"
-    ></script>
+select.addEventListener('input', (event) => {
+  modelViewerVariants.variantName = event.target.value;
+});
+</script>
   </body>
 </html>
