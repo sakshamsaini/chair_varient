@@ -14,52 +14,49 @@
   <body>
     <img class="header_logo" src="https://cdn.glitch.com/2b6d7c24-4155-4cc0-a0e9-25c12a0b0a46%2Fimage.png?v=1620647746308"></img>
     <div id="card">
-     <model-viewer id ="chair"
-      camera-controls src="/SheenChair.glb"
+     <model-viewer 
+      camera-controls src="https://cdn.glitch.com/2b6d7c24-4155-4cc0-a0e9-25c12a0b0a46%2Fstreet.glb?v=1620646887881"
       alt="A 3D model of a shoe" 
       ar camera-orbit="33deg 67deg auto"
-      ios-src="#" shadow-intensity="1">
+      poster="https://cdn.khronos.org/assets/blog/live-gltf-asset-editing-in-your-browsereven-in-ar/shoePoster.png"
+      ios-src="https://cdn.glitch.com/2b6d7c24-4155-4cc0-a0e9-25c12a0b0a46%2Fstreet.usdz?v=1620646853948" shadow-intensity="1">
       <button slot="ar-button" class="ar-button">View in your space</button>
       <div id="ar-prompt">
         <img src="https://cdn.khronos.org/assets/blog/live-gltf-asset-editing-in-your-browsereven-in-ar/hand.png">
       </div>
-       <div class="control">
-         <div>Variant: <select id="variant"></select></div>
-       </div>
+      <div id="controls">
+        <label for="diffuse">Style: </label>
+        <select id="diffuse">
+            <option value="https://cdn.glitch.com/2b6d7c24-4155-4cc0-a0e9-25c12a0b0a46%2Fstreet-basecolor.jpg?v=1620646837022">Street
+            </option>
+            <option value="https://cdn.glitch.com/2b6d7c24-4155-4cc0-a0e9-25c12a0b0a46%2Fmidnight-basecolor.jpg?v=1620646837523">
+                Midnight</option>
+            <option value="https://cdn.glitch.com/2b6d7c24-4155-4cc0-a0e9-25c12a0b0a46%2Fbeach-basecolor.jpg?v=1620646837133">Beach
+            </option>
+        </select>
+    </div>
  
   </model-viewer>
 </div>
  </body>
 </html>
 
- <script>
-      // check for IE11
-      window.addEventListener("DOMContentLoaded", function() {
-        var isIE11 = !window.ActiveXObject && "ActiveXObject" in window;
-        if (isIE11) {
-          var ie11Message = document.getElementById("ie11-message");
-          ie11Message.style.display = "block";
-          return;
-        }
-      });
-    </script>
+<script type="module">
+    const modelViewerTexture = document.querySelector("model-viewer");
 
-    <script>
-      const modelViewerVariants = document.querySelector("model-viewer#chair");
-      const select = document.querySelector('#variant');
-      modelViewerVariants.addEventListener('load', () => {
-      const names = modelViewerVariants.availableVariants;
-      for (const name of names) {
-       const option = document.createElement('option');
-       option.value = name;
-       option.textContent = name;
-       select.appendChild(option);
-      }
-     });
-     select.addEventListener('input', (event) => {
-     modelViewerVariants.variantName = event.target.value;
-     });
-    </script>
+    modelViewerTexture.addEventListener("scene-graph-ready", (ev) => {
+
+        let material = modelViewerTexture.model.materials[0];
+
+        document.querySelector('#diffuse').addEventListener('input', (event) => {
+            material.pbrMetallicRoughness.baseColorTexture.texture.source.setURI(event.target.value);
+        });
+
+        document.querySelector("#controls").addEventListener('beforexrselect', (ev) => {
+            ev.preventDefault();
+        });
+    })
+</script>
 
 <style>
     model-viewer {
