@@ -14,11 +14,7 @@
   <body>
     
     <div id="card">
-     <model-viewer id ="chair"
-      camera-controls src="/bed.glb"
-      alt="A 3D model of a shoe" poster="poster.webp" 
-      ar ar-modes="scene-viewer webxr" camera-orbit="33deg 67deg auto"
-      shadow-intensity="1">
+     <model-viewer src="bed.glb" ar ar-modes="scene-viewer webxr quick-look" camera-controls poster="poster.webp" shadow-intensity="1.73" exposure="0.53" shadow-softness="0.72" environment-image="legacy" auto-rotate>
       <button slot="ar-button" class="ar-button">View in your space</button>
       <div id="ar-prompt">
         <img src="https://cdn.khronos.org/assets/blog/live-gltf-asset-editing-in-your-browsereven-in-ar/hand.png">
