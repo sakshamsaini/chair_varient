@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>MYSTICAL</title>
+    <title>Bed Demo</title>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -12,10 +12,10 @@
     <script src="/utils.js"></script>
     </head>
   <body>
-    <img class="header_logo" src="image.png"></img>
+    
     <div id="card">
      <model-viewer id ="chair"
-      camera-controls src="/SheenChair.glb"
+      camera-controls src="/bed.glb"
       alt="A 3D model of a shoe" 
       ar camera-orbit="33deg 67deg auto"
       ios-src="/chair-varient.usdz" shadow-intensity="1">
@@ -23,9 +23,7 @@
       <div id="ar-prompt">
         <img src="https://cdn.khronos.org/assets/blog/live-gltf-asset-editing-in-your-browsereven-in-ar/hand.png">
       </div>
-       <div class="control">
-         <div>Variant: <select id="variant"></select></div>
-       </div>
+     
  
   </model-viewer>
 </div>
