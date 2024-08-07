@@ -12,7 +12,7 @@
     <script src="/utils.js"></script>
     </head>
   <body>
-    <img class="header_logo" src="https://cdn.glitch.com/2b6d7c24-4155-4cc0-a0e9-25c12a0b0a46%2Fimage.png?v=1620647746308"></img>
+    <img class="header_logo" src="/avroLogo.png"></img>
     <div id="card">
      <model-viewer 
       camera-controls src="https://cdn.glitch.com/2b6d7c24-4155-4cc0-a0e9-25c12a0b0a46%2Fstreet.glb?v=1620646887881"
@@ -41,22 +41,7 @@
  </body>
 </html>
 
-<script type="module">
-    const modelViewerTexture = document.querySelector("model-viewer");
-
-    modelViewerTexture.addEventListener("scene-graph-ready", (ev) => {
-
-        let material = modelViewerTexture.model.materials[0];
-
-        document.querySelector('#diffuse').addEventListener('input', (event) => {
-            material.pbrMetallicRoughness.baseColorTexture.texture.source.setURI(event.target.value);
-        });
-
-        document.querySelector("#controls").addEventListener('beforexrselect', (ev) => {
-            ev.preventDefault();
-        });
-    })
-</script>
+  
 
 <style>
     model-viewer {
